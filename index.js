@@ -3,12 +3,23 @@ const app = express();
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors")
-const db = mysql.createPool({
-    host: "hraprotal.db.9145261.566.hostedresource.net",
-    user: "hraprotal",
-    password: "password@1L",
-    database: "hraprotal"
+const mongoose = require("mongoose");
+
+mongoose.connect(
+    `mongodb+srv://iCode:LOXmw78dTJLBc5KJ@cluster0.9wfwq.mongodb.net/ecommerce?retryWrites=true&w=majority`, 
+{
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}).then(() => {
+    console.log('Database Connected')
 });
+// const db = mysql.createPool({
+//     host: "hraprotal.db.9145261.566.hostedresource.net",
+//     user: "hraprotal",
+//     password: "password@1L",
+//     database: "hraprotal"
+// });
 // db.connect(function(err) {​​
 //     if (err) {​​ 
 //     return console.error('error: ' + err.message); 
@@ -22,7 +33,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => 
-res.status(200).send("Hello World")
+res.status(200).send("Hello World") 
 );
 
 // //get staffs/employees data
