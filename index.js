@@ -4,10 +4,10 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cors = require("cors")
 const db = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "hr_portal"
+    host: "hraprotal.db.9145261.566.hostedresource.net",
+    user: "hraprotal",
+    password: "password@1L",
+    database: "hraprotal"
 });
 
 //middleware
