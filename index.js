@@ -10,7 +10,8 @@ const fileUpload = require("express-fileupload");
 const multer = require('multer');
 const shortid = require('shortid');
 const path = require('path');
-const mailer = require('nodemailer')
+const mailer = require('nodemailer');
+const port = process.env.PORT || 8001;
 
 const db = mysql.createPool({
     host: "hrportalspfx.db.9145261.4bf.hostedresource.net",
@@ -728,9 +729,9 @@ app.put("/update/sectB/", (req, res )=>{
     })
 })
 
-var server = app.listen(3001, ()=>{
-    var port = server.address().port
-    console.log('Running on port ' + port)
+var server = app.listen(port, ()=>{
+    var porter = server.address().port
+    console.log('Running on port ' + porter)
 }); 
 
 
