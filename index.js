@@ -128,16 +128,7 @@ app.get("/api/employee/:id", (req, res)=>{
     db.query(sqlSelect, id, (err, result) => {
         res.send(result);
     });
-});
-
-// //get staffs/employee data by email
-// app.get("/admin", verifyJWT, async (req, res)=>{
-// const id = req.userId
-//    const sqlSelect = "SELECT * FROM administrator WHERE sn = ?";
-//    await db.query(sqlSelect, id, (err, result) => {
-//        res.send(result);
-//    });
-// });
+})
 
 //get staffs/employee data by email
 app.get("/admin", async (req, res)=>{
