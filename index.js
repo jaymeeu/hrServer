@@ -260,7 +260,7 @@ app.delete("/api/delete/employee/:StaffID", (req, res )=>{
     })
 })
 
- //delete sectionA question by sn
+ //delete ${endPoint}A question by sn
  app.delete("/delete/sectionA/:sn", (req, res )=>{
     const sn = req.params.sn;
     const sqlDelete = "DELETE FROM appraisalSectionA WHERE sn = ?";
@@ -353,18 +353,12 @@ app.get("/api/jobrole", (req, res)=>{
 app.get("/recentApp", async (req, res)=>{
     const sqlSelect = "SELECT staffID FROM kpiscore ORDER BY sn DESC LIMIT 5" ;
     await db.query(sqlSelect,  (err, result) => {
-        const resultt = "jamiu@gmail.com";
-    //   res.send(result)
-    // console.log(result)
-      //  const rst = result.StaffID;
 
        const first = JSON.parse(JSON.stringify(result[0].staffID));
        const second = JSON.parse(JSON.stringify(result[1].staffID));
        const third = JSON.parse(JSON.stringify(result[2].staffID));
        const fourth = JSON.parse(JSON.stringify(result[3].staffID));
        const fifth = JSON.parse(JSON.stringify(result[4].staffID));
-    //    console.log(resultt)
-    //    console.log(rs)
       
        
         if(result){
@@ -417,7 +411,7 @@ app.post("/api/addJobRole", (req, res) => {
 
 //get sectionA question
 app.get("/sectionA", (req, res)=>{
-    const sqlSelect = "SELECT * FROM appraisalSectionA";
+    const sqlSelect = "SELECT * FROM appraisalsectiona";
     db.query(sqlSelect,  (err, result) => {
         res.send(result);
     });
@@ -425,7 +419,7 @@ app.get("/sectionA", (req, res)=>{
 
 //get sectionB question
 app.get("/sectionB", (req, res)=>{
-    const sqlSelect = "SELECT * FROM appraisalSectionB";
+    const sqlSelect = "SELECT * FROM appraisalsectionb";
     db.query(sqlSelect,  (err, result) => {
         res.send(result);
     });
@@ -733,7 +727,6 @@ var server = app.listen(port, ()=>{
     var porter = server.address().port
     console.log('Running on port ' + porter)
 }); 
-
 
 
 //get request testing
