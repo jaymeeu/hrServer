@@ -20,22 +20,6 @@ const db = mysql.createPool({
     database: "hrportalspfx"
 });
 
-// const db = mysql.createPool({
-//     host: "localhost",
-//     user: "root",
-//     password: "",
-//     database: "hr_portal"
-// });
-
-// const storage = multer.diskStorage({
-//     destination: function (req, file, next) {
-//       next(null, path.join(path.dirname(__dirname),  'uploads'))
-//     },
-//     filename: function (req, file, cb) {
-//       next(null, shortid.generate() + '-' + file.originalname)
-//     }
-//   })
-// const upload = multer({ storage });
 
 const transporter = mailer.createTransport({
     service: 'gmail',
@@ -263,7 +247,7 @@ app.delete("/api/delete/employee/:StaffID", (req, res )=>{
  //delete ${endPoint}A question by sn
  app.delete("/delete/sectionA/:sn", (req, res )=>{
     const sn = req.params.sn;
-    const sqlDelete = "DELETE FROM appraisalSectionA WHERE sn = ?";
+    const sqlDelete = "DELETE FROM appraisalsectiona WHERE sn = ?";
     db.query(sqlDelete, sn, (err, result)=>{
     })
 })
@@ -272,7 +256,7 @@ app.delete("/api/delete/employee/:StaffID", (req, res )=>{
  //delete sectionA question by sn
 app.delete("/delete/sectionB/:sn", (req, res )=>{
     const sn = req.params.sn;
-    const sqlDelete = "DELETE FROM appraisalSectionB WHERE sn = ?";
+    const sqlDelete = "DELETE FROM appraisalsectionb WHERE sn = ?";
     db.query(sqlDelete, sn, (err, result)=>{
     })
 })
@@ -301,7 +285,7 @@ app.post("/api/Appraisal/SectionA/Upload", (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
    
-    const sqlInsert = "INSERT INTO AppraisalSectionA (Title, Description) VALUES (?,?)";
+    const sqlInsert = "INSERT INTO appraisalsectiona (Title, Description) VALUES (?,?)";
     db.query(sqlInsert, [title,description], (err, result) => {
         console.log(err);
     });
@@ -316,7 +300,7 @@ app.post("/api/Appraisal/SectionB/Upload", (req, res) => {
     const department = req.body.department; 
 
     department.forEach(departs => {
-        const sqlInsert = "INSERT INTO AppraisalSectionB (perspectives, measures, objectives, targets, department) VALUES (?,?,?,?,?)";
+        const sqlInsert = "INSERT INTO appraisalsectionb (perspectives, measures, objectives, targets, department) VALUES (?,?,?,?,?)";
         db.query(sqlInsert, [perspectives,measures, objectives, targets,departs], (err, result) => {
         console.log(err);
     });  
@@ -727,45 +711,3 @@ var server = app.listen(port, ()=>{
     var porter = server.address().port
     console.log('Running on port ' + porter)
 }); 
-
-
-//get request testing
-// app.get("/api/get", (req, res)=>{
-//     const sqlSelect = "SELECT * FROM test";
-//     db.query(sqlSelect,  (err, result) => {
-//         res.send(result);
-//     });
-// });
-
-// post request
-// app.post("/test/insert", (req, res) => {
-//   const firstname = req.body.firstname;
-//   const address = req.body.address;
-//   const sqlInsert = "INSERT INTO test (firstname, address) VALUES (?,?)";
-//   db.query(sqlInsert, [firstname, address], (err, result) => {
-//       console.log(err);
-//   });
-// });
-
-//delete request
-// app.delete("/api/delete/:firstname", (req, res )=>{
-//     const name = req.params.firstname;
-//     const sqlDelete = "DELETE FROM test WHERE firstname = ?";
-//     db.query(sqlDelete, name, (err, result)=>{
-
-//     })
-// })
-
-//Update request
-// app.put("/api/update/", (req, res )=>{
-//     const firstname = req.body.firstname;
-//     const address = req.body.address;
-
-//     const sqlUpdate = "UPDATE test SET address = ? WHERE firstname = ?";
-//     db.query(sqlUpdate, [address, firstname], (err, result)=>{
-//         console.log(result);
-
-//     })
-// })
-
- 
